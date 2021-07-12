@@ -1,5 +1,6 @@
 import { ServerApp } from 'svelte-pilot';
 import router from './router';
+// import ssr from 'svelte/types/compiler/compile/render_ssr'
 
 export default async function(args) {
   try {

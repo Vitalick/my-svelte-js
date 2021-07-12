@@ -1,32 +1,44 @@
 <script>
   import { RouterView, RouterLink } from 'svelte-pilot';
-  import router from './router'
   import logo from './assets/svelte.png'
   import Counter from './views/Counter.svelte'
   import About from './views/About.svelte'
   import { elapsed } from './store'
   import './lib/TailwindCSS.svelte'
   import SButton from './components/base/SButton.svelte'
+  import { getContext } from 'svelte';
 
-  let darkMode = router.mode === 'server' ? false : ['1', '0'].includes(localStorage.getItem('darkTheme')) ? !!parseInt(localStorage.getItem('darkTheme')) : !!window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let ssrState = getContext('__SVELTE_PILOT_ROUTER__').mode;
+  $: ssrState = getContext('__SVELTE_PILOT_ROUTER__').mode
+  // export async function load(props, route, ssrCtx) {
+  //   console.log(ssrCtx)
+  //   return {
+  //     props,
+  //     route,
+  //     ssrCtx
+  //   }
+  // }
+
+
+  let darkMode = ssrState === 'server' ? false : ['1', '0'].includes(localStorage.getItem('darkTheme')) ? !!parseInt(localStorage.getItem('darkTheme')) : !!window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   const turnDarkMode = () => {
     darkMode = !darkMode
+    console.log(darkMode)
   }
 
-  $: if (router.mode === 'client') {if (darkMode) {
+  $: if (ssrState === 'client') {if (darkMode) {
     console.log('Turned on')
     window.document.querySelector('body').classList.add('dark')
     localStorage.setItem('darkTheme', '1')
   } else {
     console.log('Turned off')
     window.document.querySelector('body').classList.remove('dark')
-    localStorage.setItem('darkTheme', '0')
   }}
 </script>
 
 <main class='text-center p-2 my-0 mx-auto'>
-  {router.mode}
+  {ssrState}
     <img src={logo} class='h-64 w-64 ' alt='Svelte Logo' />
     <h1>Hello world! {$elapsed}</h1>
     <nav>

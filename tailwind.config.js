@@ -13,7 +13,7 @@ module.exports = {
       "./src/**/*.svelte",
 
     ],
-    enabled: production // disable purge in dev
+    enabled: true // disable purge in dev
   },
   darkMode: "class", // or 'media' or 'class'
   theme: {

@@ -1,10 +1,9 @@
 import { Router } from 'svelte-pilot';
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       component: () => import('../App.svelte'),
-
       children: [
         // {
         //   name: 'footer',
@@ -26,3 +25,5 @@ export default new Router({
     }
   ]
 });
+
+export default router;
