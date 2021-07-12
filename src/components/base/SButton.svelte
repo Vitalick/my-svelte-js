@@ -6,7 +6,7 @@
   button {
     font-family: inherit;
     font-size: inherit;
-    @apply py-4 px-8 text-orange bg-orange bg-opacity-10 rounded-4xl border-2 border-solid border-orange border-opacity-0 outline-none tabular-nums cursor-pointer transition-colors;
+    @apply py-4 px-8 text-primary bg-primary bg-opacity-10 rounded-4xl border-2 border-solid border-primary border-opacity-0 outline-none tabular-nums cursor-pointer transition-colors;
 
     &:focus {
       @apply border-opacity-100;

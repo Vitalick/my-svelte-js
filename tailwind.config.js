@@ -14,11 +14,11 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     colors: {
+      primary: '#ff3e00',
       gray: colors.coolGray,
       blue: colors.sky,
       red: colors.rose,
       pink: colors.fuchsia,
-      orange: '#ff3e00',
       dark: colors.blueGray,
       light: colors.white,
     },

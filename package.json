@@ -6,7 +6,7 @@
     "build:csr": "vite build --emptyOutDir --outDir dist",
     "build:ssr": "export VITE_SVELTE_HYDRATABLE=1 && rm -rdf dist && vite build --ssrManifest --outDir dist/client && mkdir dist/tmp && mv dist/client/ssr-manifest.json dist/tmp/ && node fix-ssr-manifest.js && vite build --ssr src/server-render.js --outDir dist/tmp && cp dist/client/index.html dist/tmp/ && cp src/server.js dist/tmp/ &&  rollup -c rollup.server.config.js && rm -rdf dist/tmp&& cp dist/client/index.html dist/server/ ",
     "serve:csr": "vite preview ./ --port 3000",
-    "serve:ssr": "PORT=3000 node dist/server",
+    "serve:ssr": "PORT=3000 pm2 start dist/server  --no-daemon",
     "lint": "eslint ./src"
   },
   "lint-staged": {
@@ -15,12 +15,16 @@
     "package.json": "sort-package-json"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/eslint-parser": "^7.14.7",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.12",
     "@vitejs/plugin-legacy": "^1.4.3",
+    "airbnb": "^0.0.2",
     "autoprefixer": "^10.2.6",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-svelte3": "^3.2.0",
     "postcss": "^8.3.5",
     "prettier": "^2.3.2",

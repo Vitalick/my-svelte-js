@@ -1,42 +1,33 @@
 <script>
-  import { RouterView, RouterLink } from 'svelte-pilot'
-  import logo from './assets/svelte.png'
-  import { elapsed } from './store'
-  import './lib/TailwindCSS.svelte'
-  import SButton from './components/base/SButton.svelte'
-  import { getContext } from 'svelte'
+  import { RouterView, RouterLink } from "svelte-pilot";
+  import logo from "./assets/svelte.png";
+  import { elapsed } from "./store";
+  import SButton from "./components/base/SButton.svelte";
+  import { getContext } from "svelte";
 
-  let ssrState = getContext('__SVELTE_PILOT_ROUTER__').mode
-  $: ssrState = getContext('__SVELTE_PILOT_ROUTER__').mode
-  // export async function load(props, route, ssrCtx) {
-  //   console.log(ssrCtx)
-  //   return {
-  //     props,
-  //     route,
-  //     ssrCtx
-  //   }
-  // }
+  let ssrState = getContext("__SVELTE_PILOT_ROUTER__").mode;
+  $: ssrState = getContext("__SVELTE_PILOT_ROUTER__").mode;
 
   let darkMode =
-    ssrState === 'server'
+    ssrState === "server"
       ? false
-      : ['1', '0'].includes(localStorage.getItem('darkTheme'))
-      ? !!parseInt(localStorage.getItem('darkTheme'))
-      : !!window.matchMedia('(prefers-color-scheme: dark)').matches
+      : ["1", "0"].includes(localStorage.getItem("darkTheme"))
+      ? !!parseInt(localStorage.getItem("darkTheme"))
+      : !!window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   const turnDarkMode = () => {
-    darkMode = !darkMode
-    console.log(darkMode)
-  }
+    darkMode = !darkMode;
+  };
 
-  $: if (ssrState === 'client') {
+  $: if (ssrState === "client") {
     if (darkMode) {
-      console.log('Turned on')
-      window.document.querySelector('body').classList.add('dark')
-      localStorage.setItem('darkTheme', '1')
+      console.log("Turned on");
+      window.document.querySelector("body").classList.add("dark");
+      localStorage.setItem("darkTheme", "1");
     } else {
-      console.log('Turned off')
-      window.document.querySelector('body').classList.remove('dark')
+      console.log("Turned off");
+      window.document.querySelector("body").classList.remove("dark");
+      localStorage.setItem("darkTheme", "0");
     }
   }
 </script>
@@ -91,8 +82,12 @@
 
 <!--</style>-->
 <style global lang="scss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
   h1 {
-    @apply text-orange uppercase text-7xl font-thin my-8 mx-auto max-w-sm;
+    @apply text-primary uppercase text-7xl font-thin my-8 mx-auto max-w-sm;
     @screen sm {
       @apply max-w-none;
     }
@@ -110,7 +105,7 @@
   }
 
   a {
-    @apply text-orange underline transition-colors;
+    @apply text-primary underline transition-colors;
 
     &:focus {
       @apply no-underline;
